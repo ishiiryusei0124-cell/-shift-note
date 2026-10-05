@@ -1,0 +1,4 @@
+"use client";
+import {useEffect,useState} from "react";
+import {Smartphone} from "lucide-react";
+export default function InstallGuide(){const [visible,setVisible]=useState(false);useEffect(()=>{const ios=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);const installed=window.matchMedia("(display-mode: standalone)").matches||(navigator as any).standalone;setVisible(ios&&!installed);},[]);if(!visible)return null;return <details className="install-guide"><summary><Smartphone size={18}/>iPhoneのホーム画面に追加</summary><ol><li>このページをSafariで開く。</li><li>Safariの「共有」から「ホーム画面に追加」を選ぶ。</li><li>表示される場合は「Webアプリとして開く」をオンにして、「追加」を押す。</li></ol><p>追加した「アルバイト」のアイコンから開けます。ログインなしでも利用できます。ホーム画面のアプリとSafariでは、記録が分かれる場合があります。読み込み・保存にはインターネット接続が必要です。</p></details>;}

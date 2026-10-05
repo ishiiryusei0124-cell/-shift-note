@@ -1,0 +1,25 @@
+.charge-intro{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 44%,#092733 0%,#041018 46%,#02080e 100%);color:#e2fcff;opacity:1;transition:opacity .32s ease;padding:max(24px,env(safe-area-inset-top)) 24px max(24px,env(safe-area-inset-bottom));overflow:hidden}
+.charge-closing{opacity:0}
+.reactor-unit{width:min(100%,340px);text-align:center}
+.reactor-kicker{color:#75cddd;letter-spacing:.3em;font-size:13px;font-weight:600;margin:0 0 28px}
+.reactor-display{position:relative;width:min(100%,320px);aspect-ratio:1;margin:auto;filter:drop-shadow(0 0 16px #27d8ff40)}
+.reactor-rings{width:100%;height:100%;fill:none}
+.reactor-outline{stroke:#207286;stroke-width:1;opacity:.6}
+.reactor-segments{stroke:#89efff;stroke-width:9;stroke-dasharray:21 15;opacity:.7}
+.reactor-track{stroke:#164753;stroke-width:2}
+.reactor-charge{stroke:#b4f6ff;stroke-width:7;stroke-linecap:round;filter:drop-shadow(0 0 5px #44ddff)}
+.reactor-inner-segments{stroke:#43d4ee;stroke-width:3;stroke-dasharray:45 9;opacity:.6}
+.reactor-core-ring{stroke:#7eefff;stroke-width:1.5;filter:drop-shadow(0 0 8px #4fdcff)}
+.reactor-spin{transform-origin:160px 160px;animation:reactor-turn 14s linear infinite}
+.reactor-spin-reverse{transform-origin:160px 160px;animation:reactor-turn 20s linear infinite reverse}
+.reactor-core{position:absolute;inset:24%;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;background:radial-gradient(circle,#1ca8c51c,#08293408);box-shadow:inset 0 0 35px #39d5ff16;transition:box-shadow .3s ease}
+.reactor-core strong{font-size:58px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.2;letter-spacing:-.04em;text-shadow:0 0 22px #5be4ff70}
+.reactor-core strong span{font-size:19px;margin-left:3px;letter-spacing:0;color:#9adeeb}
+.reactor-core-caption{font-size:12px;letter-spacing:.18em;color:#82d3e4;margin-top:8px}
+.reactor-caption{font-size:14px;color:#bbdce4;margin:29px 0 16px;letter-spacing:.08em}
+.reactor-linear-track{height:3px;background:#14323d;width:200px;margin:auto;border-radius:4px;overflow:hidden}
+.reactor-linear-track span{display:block;height:100%;background:#83eafa;box-shadow:0 0 8px #42d7f3}
+.reactor-footnote{font-size:12px;color:#577d8a;letter-spacing:.15em;margin-top:23px}
+.reactor-charged .reactor-core{box-shadow:inset 0 0 45px #5edfff40,0 0 25px #5edfff30}
+@keyframes reactor-turn{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.reactor-spin,.reactor-spin-reverse{animation:none}.charge-intro{transition:none}}

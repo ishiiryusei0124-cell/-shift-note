@@ -1,0 +1,11 @@
+"use client";
+import {Table,TableBody,TableCell,TableHead,TableHeader,TableRow} from "@/components/ui/table";
+import {calendarWeeks} from "@/lib/calendar";
+import {holidayLabel,Shift} from "@/lib/pay";
+export default function ShiftCalendar({month,shifts}:{month:string,shifts:Shift[]}){
+ const weeks=calendarWeeks(month);
+ const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo'}).format(new Date());
+ const dates=new Map<string,Shift[]>();for(const shift of shifts){const list=dates.get(shift.date)??[];list.push(shift);dates.set(shift.date,list);}
+ for(const list of dates.values())list.sort((a,b)=>a.start.localeCompare(b.start));
+ return <section className="shift-calendar" aria-label={`${month.replace('-','年 ')}月のシフトカレンダー`}><div className="calendar-heading"><h2>シフトカレンダー</h2><div className="calendar-legend"><span className="legend-shift"/>シフトあり<span className="legend-today"/>今日</div></div><Table className="calendar-table"><TableHeader><TableRow>{['日','月','火','水','木','金','土'].map((day,i)=><TableHead key={day} className={i===0?'calendar-sunday':i===6?'calendar-saturday':''} scope="col">{day}</TableHead>)}</TableRow></TableHeader><TableBody>{weeks.map((week,row)=><TableRow key={row}>{week.map((date,col)=>{const list=date?dates.get(date)??[]:[];const holiday=date?holidayLabel(date):'';return <TableCell key={col} className={`calendar-cell ${!date?'calendar-blank':''} ${list.length?'has-shift':''} ${date===today?'is-today':''}`} aria-label={date?`${date}${holiday?' '+holiday:''}、${list.length?list.map(s=>s.start+'から'+s.end+(s.end<s.start?' 翌日まで':'')).join('、'):'シフトなし'}`:'月外'}>{date&&<><div className="calendar-date"><time dateTime={date} className={holiday==='祝日'||col===0?'calendar-sunday':col===6?'calendar-saturday':''}>{Number(date.slice(8))}</time>{holiday==='祝日'&&<span className="calendar-holiday">祝</span>}</div><div className="calendar-shifts">{list.map(shift=><div className="calendar-shift" key={shift.id}><span>{shift.start}<span className="calendar-dash"> – </span>{shift.end}</span>{shift.end<shift.start&&<small>翌日まで</small>}</div>)}</div></>}</TableCell>})}</TableRow>)}</TableBody></Table><p className="calendar-footnote">{month.replace('-','年 ')}月 · {new Set(shifts.filter(s=>s.date.startsWith(month)).map(s=>s.date)).size}日勤務</p></section>;
+}
