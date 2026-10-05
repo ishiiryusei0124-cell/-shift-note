@@ -1,0 +1,1 @@
+ALTER TABLE `user_settings` ADD `base` integer DEFAULT 1350 NOT NULL;
